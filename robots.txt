@@ -1,0 +1,6 @@
+User-agent: *
+Allow: /
+Disallow: /product.html
+Disallow: /event.html
+Disallow: /story.html
+Sitemap: https://playtion-gacha.pages.dev/sitemap.xml

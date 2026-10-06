@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>상품 안내 | 플레이션 가챠샵</title>
+<meta name="description" content="상품의 1회 가격, 기기 위치, 매장 확인 시각을 안내합니다.">
+<meta name="robots" content="noindex">
+<link rel="canonical" href="https://playtion-gacha.pages.dev/product.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="플레이션 가챠샵">
+<meta property="og:title" content="상품 안내 | 플레이션 가챠샵">
+<meta property="og:description" content="상품의 1회 가격, 기기 위치, 매장 확인 시각을 안내합니다.">
+<meta property="og:image" content="https://playtion-gacha.pages.dev/assets/img/og.jpg">
+<meta property="og:url" content="https://playtion-gacha.pages.dev/product.html">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#CF3326">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="assets/img/icon-192.png">
+<link rel="manifest" href="site.webmanifest">
+<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+<link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body data-page="product">
+<a class="skip-link" href="#main">본문 바로가기</a>
+<div class="checker" aria-hidden="true"></div>
+<header class="site-header">
+  <div class="container bar">
+    <a class="logo" href="index.html" aria-label="플레이션 가챠샵 홈"><svg class="logo__mark" viewBox="0 0 40 40" aria-hidden="true"><circle cx="20" cy="20" r="17" fill="#fff"/><path d="M32 8A17 17 0 0 1 8 32Z" fill="#CF3326"/><circle cx="20" cy="20" r="17" fill="none" stroke="#171A20" stroke-width="3"/><path d="M32 8L8 32" stroke="#171A20" stroke-width="3" stroke-linecap="round"/><path d="M19 29q4 3 8-1" stroke="#171A20" stroke-width="2.5" stroke-linecap="round" fill="none"/></svg><span class="logo__text">플레이션 가챠<span class="logo__sub">PLAYTION CAPSULE TOY SHOP</span></span></a>
+    <nav class="nav" aria-label="주 메뉴">
+      <a href="products.html" data-nav="products">상품 찾기</a>
+      <a href="events.html" data-nav="events">행사</a>
+      <a href="swap.html" data-nav="swap">중복 교환회</a>
+      <a href="club.html" data-nav="club">컬렉터 클럽</a>
+      <a href="help.html" data-nav="help">처음 오셨나요</a>
+      <a href="visit.html" data-nav="visit">방문 안내</a>
+    </nav>
+    <a class="btn btn--red btn--sm header-cta" href="visit.html">매장 가는 길</a>
+  </div>
+</header>
+<div id="notice-bar" class="notice-bar hidden"></div>
+<main id="main">
+<section class="container">
+  <div id="detail" class="detail"></div>
+</section>
+
+<section class="section section--neutral" id="map">
+  <div class="container split">
+    <div class="storemap">
+      <div id="map-host"></div>
+      <p class="storemap__caption">구역 도식은 개념 안내예요. 기기 배치가 확정되면 실측에 맞춰 갱신합니다. 구역 안에서는 열·단 번호 라벨을 따라가세요.</p>
+    </div>
+    <div>
+      <h2 style="font-size:1.6rem;margin-bottom:8px">매장에서 이 상품을 찾아보세요</h2>
+      <p class="loc-code" id="map-code"></p>
+      <p class="muted">구역 입구에 열 번호, 기기 앞에 단 번호가 붙어 있어요. 번호대로 가면 지도 확대 없이도 찾을 수 있습니다. 기기 본체를 옮겨도 상품 주소는 그대로이고 위치 번호만 바뀝니다.</p>
+      <ul class="muted" style="font-size:0.95rem">
+        <li>위치가 다르거나 가격이 다르면 ‘위치·가격 오류 알리기’로 알려주세요. 연락처 없이도 접수돼요.</li>
+        <li>돈만 들어가고 상품이 나오지 않았다면 기기 번호와 시각을 남겨 주세요. 현장 확인 후 처리합니다.</li>
+      </ul>
+      <div class="btn-row">
+        <a class="btn btn--outline btn--sm" href="products.html">다른 상품 찾기</a>
+        <a class="btn btn--ghost btn--sm" href="help.html#inquiry">기기 고장 알리기</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section hidden" id="related-section">
+  <div class="container">
+    <div class="section-head"><div><h2>같은 시리즈</h2><p>같은 시리즈의 다른 상품이에요. 중복이 생기면 교환회에서 바꿔보세요.</p></div><a class="more" href="swap.html">중복 교환회</a></div>
+    <div id="related" class="product-grid"></div>
+  </div>
+</section>
+</main>
+<footer class="site-footer">
+  <div class="container">
+    <div class="cols">
+      <div>
+        <div class="brandline"><svg class="logo__mark" viewBox="0 0 40 40" aria-hidden="true"><circle cx="20" cy="20" r="17" fill="#fff"/><path d="M32 8A17 17 0 0 1 8 32Z" fill="#CF3326"/><circle cx="20" cy="20" r="17" fill="none" stroke="#171A20" stroke-width="3"/><path d="M32 8L8 32" stroke="#171A20" stroke-width="3" stroke-linecap="round"/><path d="M19 29q4 3 8-1" stroke="#171A20" stroke-width="2.5" stroke-linecap="round" fill="none"/></svg><span class="logo__text">플레이션 가챠</span></div>
+        <p>건대 한아름 건물 1층 캡슐토이 매장.<br>오늘의 최애를 만나고, 함께 즐기는 곳.</p>
+        <p class="small" style="font-family:var(--display);color:var(--ink)">PLAY · COLLECT · SHARE</p>
+      </div>
+      <div><h4>둘러보기</h4><ul><li><a href="products.html">상품 찾기</a></li><li><a href="events.html">행사와 프로그램</a></li><li><a href="swap.html">중복 교환회</a></li><li><a href="club.html">컬렉터 클럽</a></li></ul></div>
+      <div><h4>방문</h4><ul><li><a href="visit.html">방문 안내</a></li><li><a href="help.html">처음 오셨나요</a></li><li><a href="help.html#inquiry">문의·고장 접수</a></li><li><a href="notices.html">공지사항</a></li></ul></div>
+      <div><h4>플레이션</h4><ul><li><a data-plt-href="links.partyRoom" href="https://playtion.pages.dev" target="_blank" rel="noopener"><span class="t">플레이션 게임파티룸</span></a></li><li><a href="rules.html">컬렉터 클럽 운영 규칙</a></li><li><a href="privacy.html">개인정보 처리 안내</a></li></ul></div>
+    </div>
+    <div class="biz" id="biz-line"></div>
+  </div>
+</footer>
+<nav class="tabbar" aria-label="하단 메뉴">
+  <a href="index.html" data-nav="home"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11.5 12 4l9 7.5"/><path d="M5 10v10h14V10"/></svg>홈</a>
+  <a href="products.html" data-nav="products"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>상품</a>
+  <a href="events.html" data-nav="events"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/></svg>행사</a>
+  <a href="club.html" data-nav="club"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M3 12h18"/><path d="M12 3a14 14 0 0 1 0 18"/></svg>클럽</a>
+  <a href="visit.html" data-nav="visit"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-6-5.2-6-11a6 6 0 0 1 12 0c0 5.8-6 11-6 11z"/><circle cx="12" cy="10" r="2.5"/></svg>방문</a>
+</nav>
+<script src="data/config.js"></script>
+<script src="data/products.js"></script>
+<script src="data/events.js"></script>
+<script src="data/stories.js"></script>
+<script src="data/notices.js"></script>
+<script src="assets/js/app.js"></script>
+<script src="assets/js/pages.js"></script>
+</body>
+</html>

@@ -1,0 +1,9 @@
+{
+  "name": "플레이션 가챠샵",
+  "short_name": "플레이션 가챠",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#FFFFFF",
+  "theme_color": "#CF3326",
+  "icons": [{ "src": "assets/img/icon-192.png", "sizes": "192x192", "type": "image/png" }, { "src": "assets/img/icon-512.png", "sizes": "512x512", "type": "image/png" }]
+}
