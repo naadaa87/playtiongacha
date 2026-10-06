@@ -1,123 +1,119 @@
-# 플레이션 가챠샵 홈페이지
+# 소셜팩토리 홈페이지 (SOCIAL FACTORY)
 
-건대 한아름 건물 1층 플레이션 가챠샵의 공식 홈페이지입니다. 서버 없이 동작하는 정적 사이트라서 깃허브에 올리고 Cloudflare Pages에 연결하면 바로 공개됩니다. 내용 수정은 `data/` 폴더의 파일 다섯 개만 고치면 됩니다.
+2015년 홍대에서 시작한 모임·강연·스터디 공간 소셜팩토리의 공식 홈페이지입니다.
+빌드 과정이 없는 정적 사이트라 GitHub에 올리고 Cloudflare Pages에 연결하면 바로 배포됩니다.
 
-## 1. 폴더 구성
+## 폴더 구성
 
 ```
-index.html        홈 (H01)
-products.html     상품 찾기 — 검색·필터·취향 찾기·기기 번호로 찾기 (P01)
-product.html      상품 상세 — 가격·기기 위치·확인 시각·매장 도식 (P02)
-events.html       행사 목록 + 첫 8주 프로그램 (E01)
-event.html        행사 상세 + 신청 (E02·E03)
-swap.html         중복 교환회 안내 + 교환 카드 만들기 (S01 소개)
-club.html         컬렉터 클럽 — 한 칸 전시·게시판 4종·수집 패스포트 (C01)
-story.html        전시 글 상세 (C02)
-visit.html        방문 안내 (V01)
-help.html         처음 오셨나요 — 이용 순서·용어·촬영소·FAQ·문의/고장 접수
-notices.html      공지사항
-privacy.html      개인정보 처리 안내
-rules.html        컬렉터 클럽 운영 규칙
-404.html          없는 주소로 들어왔을 때
-
-data/config.js    ★ 매장 정보·연락 채널·서비스 스위치·신청 전송 주소
-data/products.js  ★ 대표 상품 목록
-data/events.js    ★ 행사 목록·8주 프로그램
-data/stories.js   ★ 한 칸 전시 글
-data/notices.js   ★ 공지 (맨 위 공지가 노란 띠로 전 화면에 표시)
-
-assets/css/style.css   디자인
-assets/js/app.js       공통 동작 (설정값 반영·공지 띠·푸터·검색엔진용 정보)
-assets/js/pages.js     화면별 동작 (검색·필터·신청 폼·문의 폼)
-assets/img/            매장 사진·아이콘·공유 미리보기 이미지
-_headers, robots.txt, sitemap.xml, site.webmanifest, favicon.svg
+index.html        메인
+about.html        브랜드 이야기 (경영이념 · 로고 · 스프레드 스페이스 · 대표 소개)
+space.html        공간 안내 (평면도 · 3D 둘러보기 · 룸 1~5 · 코워킹 · 독립사무실 · 이용 안내 · 오시는 길)
+tour.html         3D 공간 둘러보기 (단일 파일, 약 5MB · 3D 모델과 참고 이미지가 모두 들어 있음)
+program.html      프로그램 · 파트너 (소셜아카데미 · 소셜패밀리 · 제휴 · 기업 이용 · 레퍼런스)
+history.html      아카이브 2015–2021 (연혁 · 지점 기록 · 선정 · 협력처)
+contact.html      예약 · 문의 (채널 · 문의 폼 · 공간 제안 · FAQ)
+404.html          없는 주소 안내
+css/style.css     디자인 (컬러 · 서체 · 레이아웃)
+js/site-config.js ★ 연락처 · 예약 채널 · 운영 정보 설정 파일
+js/main.js        메뉴 · 설정값 반영 · 문의 폼 동작
+images/           로고(svg) · 브랜드 무드 이미지 · OG 이미지
+images/space/     4층 완성 예상 이미지 26장 (룸·코워킹·독립사무실, 큰 파일 + -sm 작은 파일)
+images/scenes/    활용 예시 이미지 38장 (강연·클래스·모임 장면)
+fonts/            영문 서체 Montserrat (한글 Pretendard는 CDN에서 불러옵니다)
+functions/api/inquiry.js  문의 폼 저장 API (Cloudflare Pages Functions, 선택)
+schema.sql        문의 저장용 D1 테이블 (선택)
+_headers          보안 · 캐시 헤더
+robots.txt, sitemap.xml   검색엔진용
 ```
 
-★ 표시된 다섯 파일만 고치면 모든 화면에 반영됩니다. HTML 파일은 손대지 않아도 됩니다.
+## 1. 배포하기 (브라우저만으로 가능)
 
-## 2. 깃허브에 올리기
-
-1. github.com 에 로그인 → 오른쪽 위 `+` → **New repository**
-2. Repository name에 `playtion-gacha` 입력, Public 선택, **Create repository**
-3. 만들어진 저장소 화면에서 **uploading an existing file** 링크 클릭
-4. 압축을 푼 폴더 **안의 내용물 전부**(index.html, assets, data 등)를 드래그해서 올립니다. 폴더 자체가 아니라 폴더 안의 파일들을 올려야 `index.html`이 최상위에 놓입니다.
+### GitHub에 올리기
+1. github.com 에 로그인 → 오른쪽 위 **+** → **New repository**
+2. Repository name: `socialfactory` (원하는 이름), **Public**, 나머지는 그대로 두고 **Create repository**
+3. 만들어진 빈 저장소 화면에서 **uploading an existing file** 링크 클릭
+4. 이 압축을 푼 폴더 안의 **모든 파일과 폴더**를 드래그해서 올립니다
+   (`css`, `js`, `images`, `fonts`, `functions` 폴더째로 올리면 됩니다. `_headers`처럼 밑줄로 시작하는 파일도 꼭 포함)
+   GitHub는 한 번에 100개 파일까지만 받으므로, 전체 파일 수가 많다고 나오면 세 번에 나눠 올립니다.
+   ① `images` 폴더를 뺀 나머지 전부 → Commit ② **Add file → Upload files**에서 `images` 폴더만 → Commit
+   (그래도 많다고 하면 `images/space`와 `images/scenes`를 따로 한 번씩 더 올립니다)
 5. 아래 **Commit changes** 클릭
 
-이후 내용을 고칠 때는 저장소에서 파일을 열고 연필 아이콘(Edit)으로 수정한 뒤 Commit 하면, 1~2분 안에 사이트에 반영됩니다.
+### Cloudflare Pages에 연결하기
+1. dash.cloudflare.com → **Workers & Pages** → **Create** → **Pages** → **Connect to Git**
+2. GitHub 계정을 연결하고 방금 만든 `socialfactory` 저장소 선택
+3. 설정 화면
+   - Project name: `socialfactory` → 주소가 `https://socialfactory.pages.dev` 가 됩니다 (이미 쓰는 이름이면 `socialfactory-kondae` 처럼 바꿉니다)
+   - Framework preset: **None**
+   - Build command: 비워 둠
+   - Build output directory: `/` (또는 비워 둠)
+4. **Save and Deploy** → 1~2분 뒤 주소가 열립니다
 
-## 3. Cloudflare Pages에 연결하기
+이후에는 GitHub에서 파일을 고치고 Commit 할 때마다 자동으로 다시 배포됩니다.
 
-1. dash.cloudflare.com 로그인 → 왼쪽 **Workers & Pages** → **Create** → **Pages** 탭 → **Connect to Git**
-2. 깃허브 계정을 연결하고 `playtion-gacha` 저장소 선택
-3. 빌드 설정은 아래처럼 두고 **Save and Deploy**
-   - Framework preset: `None`
-   - Build command: (비움)
-   - Build output directory: `/` (또는 비움)
-4. 1분쯤 뒤 `https://playtion-gacha.pages.dev` 같은 주소가 생깁니다.
-5. 실제 주소가 정해지면 아래 세 곳의 `https://playtion-gacha.pages.dev` 를 실제 주소로 바꿔 주세요.
-   - `data/config.js` 의 `siteUrl`
-   - `robots.txt` 맨 아래 Sitemap 줄
-   - `sitemap.xml` 전체 (편집기에서 모두 바꾸기)
-   - 각 HTML 파일 상단의 canonical·og:url (편집기 ‘모두 바꾸기’로 한 번에)
+## 2. 내용 바꾸기
 
-자체 도메인(예: gacha.playtion.kr)을 쓰려면 Pages 프로젝트의 **Custom domains**에서 추가합니다.
+### 연락처 · 예약 채널 · 운영 정보 → `js/site-config.js`
+GitHub에서 `js/site-config.js` 를 열고 연필 아이콘(Edit)을 눌러 값을 채운 뒤 Commit 하면 됩니다.
 
-## 4. 내용 고치는 법
+| 항목 | 설명 |
+| --- | --- |
+| `contact.kakao` 등 | 카카오톡 채널 · 네이버 예약 · 스페이스클라우드 · 인스타그램 주소, 전화, 이메일. 비워 두면 그 버튼은 화면에 나오지 않습니다 |
+| `directions`, `parking` | 오시는 길 · 주차 안내. 비워 두면 해당 줄이 숨겨집니다 |
+| `pricing` | `show: true` 로 바꾸고 문구를 채우면 공간 페이지에 요금 안내가 나타납니다 |
+| `company` | 운영 법인명 · 대표 · 사업자등록번호. 채우면 푸터에 표기됩니다 |
+| `siteUrl` | 배포된 실제 주소 (도메인을 연결하면 그 주소로) |
+| `openLabel` | 상단 배너의 "2026 OPEN" 표기 |
 
-### 매장 정보·연락처 — `data/config.js`
-- 따옴표 안의 글자만 바꿉니다. `hours: ""` 처럼 비워 두면 화면에 **“오픈 확정 후 안내”** 로 표시되고, 값을 넣으면 그 값이 보입니다.
-- `openDate: "2026-10-25"` 처럼 오픈일을 넣으면 홈에 D-day가 자동으로 표시됩니다.
-- `contact.kakao` 에 카카오톡 채널 주소를 넣으면 모든 “문의” 버튼이 그 채널로 연결됩니다.
-- `features` 의 `true/false` 로 아직 운영하지 않는 서비스를 숨길 수 있습니다.
+### 문구 바꾸기
+각 `.html` 파일을 GitHub에서 열어 글자만 고치면 됩니다. 꺾쇠(`< >`) 안의 내용은 건드리지 않고 그 사이의 글자만 바꾸세요.
+공간 인원·용도는 `index.html`(메인 공간 카드), `space.html`(공간 구성), `contact.html`(FAQ) 세 곳에 있습니다.
 
-### 상품 — `data/products.js`
-- 처음에는 문의가 많은 대표 상품 30~50종만 올리면 됩니다. 600대 전체를 올릴 필요가 없습니다.
-- 지금 들어 있는 16개는 모두 **예시**(`sample: true`)입니다. 실제 상품으로 바꾸면서 `sample: true,` 줄을 지우면 ‘예시’ 표시와 안내문이 사라집니다.
-- 한 상품의 형식:
-  ```
-  { id: "p001", name: "상품명", series: "시리즈명", ip: "분류", price: 3000,
-    loc: "A-03-2", status: "sale", checkedAt: "2026-10-04T14:00:00+09:00",
-    themes: ["책상 위 작은 장면"], desc: "설명", image: "assets/img/products/p001.jpg" },
-  ```
-- `status` 는 `sale`(판매중) / `soldout`(품절) / `check`(확인 필요). `checkedAt` 에서 24시간이 지나면 자동으로 ‘확인 오래됨’으로 바뀌므로, 매장에서 확인할 때마다 시각을 갱신해 주세요.
-- 사진은 `assets/img/products/` 폴더에 올리고 경로를 적습니다. 정사각형(1:1)에 가까운 사진이 가장 잘 보입니다. 사진이 없으면 캡슐 그림이 대신 나옵니다.
-- 위치 코드는 **구역-열-단**(예 `A-12-2`)입니다. 구역 설명은 같은 파일 위쪽 `zones` 에서 고칩니다.
+### 3D 둘러보기
+`tour.html` 한 파일에 3D 모델과 참고 이미지가 모두 들어 있습니다(약 5MB). 메뉴의 '3D 둘러보기', 메인 배너, 공간 페이지의 '3D로 미리 둘러보기'에서 열리고, 공간 페이지에서는 같은 자리에 끼워서 볼 수도 있습니다. 새 버전의 3D 파일을 받으면 `tour.html`을 같은 이름으로 덮어쓰면 됩니다. 상단의 '← 공간 안내' 링크와 색상만 홈페이지에 맞춰 손봤습니다.
 
-### 행사 — `data/events.js`
-- `status` 를 `planned`(일정 확정 후 모집) → `open`(모집중) 으로 바꾸고 `date: "2026-11-08"` 을 넣으면 모집이 열립니다.
-- 신청을 받는 방법 두 가지
-  1. **외부 폼**: 네이버폼·구글폼 주소를 그 행사의 `applyUrl` 에 넣습니다. 가장 간단합니다.
-  2. **사이트 안 신청 화면**: `config.js` 의 `endpoints.eventApply` 에 서버 주소(Cloudflare Worker 등)를 넣으면 신청 폼이 사이트 안에 열립니다. 서버는 JSON을 받아 `{ "status": "pending" | "confirmed" | "waitlist" | "full" | "duplicate", "id": "..." }` 로 답하면 됩니다. 이메일 인증과 정원 확인은 이 서버에서 처리합니다.
-  - 둘 다 비어 있으면 “온라인 신청 준비 중”과 문의 채널이 표시됩니다. 작동하지 않는 버튼은 생기지 않습니다.
-- 종료된 행사는 `status: "ended"` 로 바꾸면 ‘지난 행사’로 내려갑니다.
+### 평면도
+공간 페이지의 평면도는 `space.html` 안에 그림(SVG)으로 들어 있습니다. 룸 이름·인원·치수를 바꾸려면 `space.html`에서 해당 글자를 찾아 고치면 되고, 구획 자체가 바뀌면 다시 만들어 드리는 편이 빠릅니다. 평면도 아래의 치수 표도 같은 파일에 있습니다.
 
-### 한 칸 전시 글 — `data/stories.js`
-- 파일 안에 작성 예시가 주석으로 들어 있습니다. 게시 동의를 받은 작품만 올리고, 운영자가 쓴 글은 `isStaff: true` 로 표시합니다.
-- 목록이 비어 있으면 “첫 전시를 준비하고 있어요”가 자동으로 표시됩니다.
+### 사진 바꾸기
+`images/` 폴더의 파일을 **같은 이름**으로 덮어쓰면 페이지 수정 없이 바뀝니다.
+파일은 가로 1536px 안팎의 webp 또는 jpg를 권장합니다. (jpg로 바꿀 때는 html 안의 `.webp` 를 `.jpg` 로 함께 고쳐 주세요)
 
-### 공지 — `data/notices.js`
-- 맨 위 항목이 최신입니다. `bar: true` 인 공지 하나가 모든 화면 위 노란 띠에 나옵니다. 띠를 없애려면 `bar: false` 로 바꿉니다.
+| 파일 | 쓰이는 곳 |
+| --- | --- |
+| `space/01~26-*.webp` | 룸 1~5 · 코워킹 · 독립사무실의 완성 예상 이미지 (메인 공간 카드 · 갤러리 · 공간 페이지). 실제 사진이 나오면 같은 이름으로 덮어쓰기 |
+| `scenes/01~38-*.webp` | 활용 예시 38장면 (프로그램 페이지 갤러리, 메인 '이렇게 쓰입니다') |
+| `signage.webp` | 문의 페이지 공간 제안 섹션 (브랜드 로고 월) |
+| `welcome.webp` | 브랜드 페이지 포스터 |
+| `og-image.jpg` | 카카오톡 · 문자 · SNS에 링크를 공유할 때 보이는 미리보기 이미지 (1200×630) |
 
-### 문의·고장 접수 — `help.html`
-- `config.js` 의 `endpoints.inquiry` 에 서버 주소가 있으면 사진 첨부와 함께 서버로 전송됩니다.
-- 비어 있으면 작성 내용을 복사해 카카오톡 채널·메일로 보내도록 안내합니다(`contact.kakao`, `contact.email` 기준).
+`-sm.webp` 로 끝나는 파일은 모바일용 작은 버전입니다. 같은 사진을 가로 800px로 줄여 함께 올리면 가장 좋고, 없으면 큰 파일 하나를 같은 이름으로 두 번 올려도 됩니다. 메인과 공간 페이지에서 어떤 룸에 어떤 이미지를 썼는지는 `space.html`의 ROOM 01~05 블록에서 파일명으로 확인할 수 있습니다.
 
-### 사진 바꾸기 — `assets/img/`
-- `store-front.webp`(외관), `interior.webp`(내부 전경), `wall-play.webp`, `wall-collect.webp`(벽면) 네 장이 쓰입니다. 같은 이름으로 덮어쓰면 됩니다. 가로 1600~1800px, 500KB 이하를 권합니다.
-- `og.jpg`(1200×630)는 카카오톡·인스타그램에 링크를 공유할 때 보이는 미리보기 이미지입니다.
+### 실제 주소로 바꿀 것 (배포 직후 한 번)
+- `js/site-config.js` 의 `siteUrl`
+- `robots.txt`, `sitemap.xml`, 각 html `<head>` 안의 `https://socialfactory.pages.dev` → 실제 주소 (GitHub 검색으로 한 번에 찾을 수 있습니다)
 
-## 5. 공개 전 확인
+## 3. 문의 폼 저장하기 (선택)
 
-- [ ] `config.js` 의 운영시간·휴무·결제 방식·연락 채널을 실제 확정값으로 입력 (모르면 비워 두기 — 임의로 채우지 않기)
-- [ ] 사업자 정보(`business`)와 개인정보 보호책임자 확인
-- [ ] 예시 상품 16개를 실제 대표 상품으로 교체하고 `sample: true` 제거
-- [ ] 위치 코드가 매장 라벨과 같은지 현장에서 표본 점검
-- [ ] ‘서울 최대’ 같은 비교 표현은 동일 기준의 근거를 확보하기 전까지 쓰지 않기 (지금 사이트에는 들어 있지 않습니다)
-- [ ] 행사는 일정·정원·담당자가 확정된 것만 `open` 으로
-- [ ] 공유 미리보기 확인: 카카오톡 대화창에 사이트 주소를 보내 이미지·제목이 보이는지
+기본 상태에서는 문의 폼을 보내면 방문자의 메일 앱이 열려 `contact.email` 주소로 메일을 보내도록 되어 있습니다.
+(이메일을 비워 두면 문의 내용을 복사해 카카오톡 채널에 붙여 넣도록 안내합니다.)
+문의를 Cloudflare에 저장하고 싶을 때만 아래를 진행합니다.
 
-## 6. 다음 단계에서 붙일 것
+1. Cloudflare → **Workers & Pages** → **D1 SQL Database** → **Create** → 이름 `socialfactory-db`
+2. 만든 DB의 **Console** 탭에 `schema.sql` 내용을 붙여 넣고 **Execute**
+3. Pages 프로젝트 → **Settings** → **Bindings** → **Add** → **D1 database** → Variable name `DB`, 위 DB 선택
+4. (선택) **Variables and Secrets** 에 `ADMIN_KEY` 를 추가하면 `https://주소/api/inquiry?key=값` 으로 최근 문의 100건을 JSON으로 볼 수 있습니다
+5. (선택) `NOTIFY_WEBHOOK` 에 Slack · Discord · Make 등의 웹훅 주소를 넣으면 새 문의가 들어올 때마다 전송됩니다
+6. **Deployments** 에서 **Retry deployment** 한 번 (바인딩 반영)
 
-- 행사 신청·문의 서버(Cloudflare Workers + Supabase): 이메일 일회 링크 인증, 정원 확인, 대기 승급, 체크인 QR
-- 회원 로그인과 개인 도감(2차): `features.login`, `features.ugc` 스위치를 켜면 관련 안내가 열립니다
-- 상품 QR: 기기마다 `product.html?id=상품ID` 주소를 QR로 인쇄하면 현장에서 바로 그 상품 안내가 열립니다. 상품이 바뀌어도 QR은 그대로 두고 `products.js` 의 `loc` 만 고치면 됩니다
+## 4. 도메인 연결 (선택)
+
+Pages 프로젝트 → **Custom domains** → **Set up a custom domain** → 보유한 도메인(예: `socialfactory.co.kr`) 입력 후 안내대로 DNS 레코드를 추가합니다. 연결 후 `siteUrl` 과 sitemap 주소를 바꿔 주세요.
+
+## 브랜드 기준
+
+- 컬러: 소셜 블루 `#2855E8` · 네이비 `#18233A` · 라이트 `#F7F8FA` · 라이트 블루 `#DCE7FF` · 그레이 `#BFC7D1`
+- 서체: 한글 Pretendard Bold / SemiBold, 영문 Montserrat Bold / SemiBold
+- 슬로건: 모이면 만들어진다 · TALK. PLAY. BOOK. STUDY. · EST. 2015
+- 경영이념: 사람들의 시간과 즐거움을 기억하는 공간
